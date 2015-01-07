@@ -1,0 +1,10 @@
+Package: DNMF
+Version: 0.8
+Date: 2013-09-10
+Title: DNMF
+Author: Jia Zhilong <zhilongjia@gmail.com>
+Maintainer: Jia Zhilong <zhilongjia@gmail.com>
+Description: DNMF is the discrimant Non-negative Matrix Factorization.
+License: GPL (>= 2)
+URL: https://github.com/zhilongjia/DNMF
+BugReports: https://github.com/zhilongjia/DNMF/issues
