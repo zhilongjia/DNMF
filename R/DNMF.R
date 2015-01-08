@@ -93,5 +93,5 @@ while (final > tol && count <= maxIter) {
     	#plot(obj_stack, type="l", xlab="Times of iteration", ylab="Convergence")
     	heatmap(H)
     }
-    list(W=W, H=H, delta=delta, gamma=gamma, count=count, final=final, obj_stack=obj_stack, r=r)
+    list(W=W, H=H, trainlabel=trainlabel, delta=delta, gamma=gamma, count=count, final=final, obj_stack=obj_stack, r=r)
 }
