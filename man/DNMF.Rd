@@ -3,7 +3,7 @@
 \alias{DNMF}
 \title{Discrimant Non-negative Matrix Factorization.}
 \usage{
-DNMF(data, trainlabel, r = 2, gamma = 0.001, delta = 1e-04,
+DNMF(data, trainlabel, r = 2, gamma = 0.1, delta = 1e-04,
   maxIter = 1000, tol = 1e-07, plotit = FALSE)
 }
 \arguments{
@@ -13,7 +13,7 @@ DNMF(data, trainlabel, r = 2, gamma = 0.001, delta = 1e-04,
 
 \item{r}{the dimension of expected reduction dimension, with the default value 2.}
 
-\item{gamma}{the tradeoff value for the within scatter matrix, with the default value 0.001.}
+\item{gamma}{the tradeoff value for the within scatter matrix, with the default value 0.1.}
 
 \item{delta}{the tradeoff value for the between scatter matrix, with the default value 1e-4.}
 

@@ -14,7 +14,7 @@
 #' @param data a matrix, like expression profilings of some samples. the columns are samples and the rows are gene's expression.
 #' @param trainlabel a numeric vector of sample type of all the samples, this vector should ONLY contain 1 and 2 so far and length of it should equal the column (sample) size of data.
 #' @param r the dimension of expected reduction dimension, with the default value 2.
-#' @param gamma the tradeoff value for the within scatter matrix, with the default value 0.001.  
+#' @param gamma the tradeoff value for the within scatter matrix, with the default value 0.1.  
 #' @param delta the tradeoff value for the between scatter matrix, with the default value 1e-4.
 #' @param maxIter the maximum iteration of update rules, with the default value 1000.
 #' @param tol the toleration of coverange, with the default value 1e-7.
@@ -26,7 +26,7 @@
 #' trainlabel = c(1,1,2,2)
 #' DNMF_result <- DNMF(data, trainlabel, r)
 
-DNMF <- function(data,trainlabel, r=2, gamma=0.001, delta=0.0001, maxIter=1000, 
+DNMF <- function(data,trainlabel, r=2, gamma=0.1, delta=0.0001, maxIter=1000, 
                  tol=1e-7, plotit=FALSE) {
 	
     data <- as.matrix(data)
@@ -86,12 +86,29 @@ while (final > tol && count <= maxIter) {
     #obj_stack[count] = final
     obj_stack[count] = obj1
     count = count + 1
-}  
-    #to plot the convergence of the object function
+}
+    # to plot the convergence of the object function
     if (plotit){
-    	#obj_stack = obj_stack[obj_stack>0]
-    	#plot(obj_stack, type="l", xlab="Times of iteration", ylab="Convergence")
     	heatmap(H)
     }
-    list(W=W, H=H, trainlabel=trainlabel, delta=delta, gamma=gamma, count=count, final=final, obj_stack=obj_stack, r=r)
+    
+
+    # check H. Setting down-regulted metagene in row 1 of H, 
+    # while up-regulated metagene in row 2 of H.
+    l1 <- apply(H[,which(trainlabel == names(table(trainlabel))[1])], 1, mean)
+    l2 <- apply(H[,which(trainlabel == names(table(trainlabel))[2])], 1, mean)
+    meanH <- cbind(l1, l2)
+    if (l1[1] < l2[1] && l1[2] > l2[2]) {
+        H <- rbind(H[2,], H[1,])
+        W1 <- cbind(W[,2], W[,1]) 
+    } else if ((l1[1] < l2[1] && l1[2] < l2[2]) || (l1[1] > l2[1] && l1[2] > l2[2])) {
+        stop("Fail, Run DNMF again.")
+    }
+    print ("The label-specific mean of H:")
+    print (meanH)
+
+    list(W=W, H=H, trainlabel=trainlabel, meanH=meanH, delta=delta, gamma=gamma, count=count,
+         final=final, obj_stack=obj_stack, r=r, call=match.call())
 }
+
+
