@@ -1,10 +1,11 @@
 Package: DNMF
 Version: 1.0
 Date: 2014-02-06
-Title: DNMF
+Title: DNMF: Discrimant Non-negative Matrix Factorization
 Author: Jia Zhilong <zhilongjia@gmail.com>
 Maintainer: Jia Zhilong <zhilongjia@gmail.com>
-Description: DNMF is the discrimant Non-negative Matrix Factorization.
+Description: DNMF is the discrimant Non-negative Matrix Factorization. The DNMF is to extend the Non-negative Matrix Factorization algorithm in order to extract features that enforce not only the spatial locality, but also the separability between classes in a discriminant manner. This algotherm refers to an article, Zafeiriou, Stefanos, et al. "Exploiting discriminant information in nonnegative matrix factorization with application to frontal face verification." Neural Networks, IEEE Transactions on 17.3 (2006): 683-695.
 License: GPL (>= 2)
+LazyData: true
 URL: https://github.com/zhilongjia/DNMF
 BugReports: https://github.com/zhilongjia/DNMF/issues
