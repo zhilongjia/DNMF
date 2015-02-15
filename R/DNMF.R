@@ -102,7 +102,7 @@ while (final > tol && count <= maxIter) {
         H <- rbind(H[2,], H[1,])
         W1 <- cbind(W[,2], W[,1]) 
     } else if ((l1[1] < l2[1] && l1[2] < l2[2]) || (l1[1] > l2[1] && l1[2] > l2[2])) {
-        stop("Fail, Run DNMF again.")
+        stop("Failed. Run DNMF again after restart R.")
     }
     print ("The label-specific mean of H:")
     print (meanH)
