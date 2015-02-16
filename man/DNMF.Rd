@@ -2,10 +2,10 @@
 % Please edit documentation in R/DNMF.R
 \name{DNMF}
 \alias{DNMF}
-\title{Discrimant Non-negative Matrix Factorization.}
+\title{Discrimant Non-Negative Matrix Factorization.}
 \usage{
 DNMF(data, trainlabel, r = 2, gamma = 0.1, delta = 1e-04,
-  maxIter = 1000, tol = 1e-07, plotit = FALSE)
+  maxIter = 1000, tol = 1e-07, plotit = FALSE, checkH = TRUE)
 }
 \arguments{
 \item{data}{a matrix, like expression profilings of some samples. the columns are samples and the rows are gene's expression.}
@@ -22,10 +22,14 @@ DNMF(data, trainlabel, r = 2, gamma = 0.1, delta = 1e-04,
 
 \item{tol}{the toleration of coverange, with the default value 1e-7.}
 
-\item{plotit}{whether plot H (V=WH). Default: FALSE, other options: TRUE.}
+\item{plotit}{whether plot H (V=WH). Default: FALSE.}
+
+\item{checkH}{whether or not check H. Default: TRUE. This parameter aims to
+check whether or not the H safisfy the discriminant metagenes. Usually, this
+should be TRUE.}
 }
 \description{
-The DNMF is to extend the Non-negative Matrix Factorization algorithm in
+Discrimant Non-Negative Matrix Factorization, DNMF, is to extend the Non-negative Matrix Factorization algorithm in
 order to extract features that enforce not only the spatial locality, but
  also the separability between classes in a discriminant manner.
 }
@@ -41,6 +45,11 @@ with some \strong{CORRECTIONs}.
 r =2
 data =  matrix(1:12,3,4)
 trainlabel = c(1,1,2,2)
+DNMF_result <- DNMF(data, trainlabel, r, plotit=FALSE, checkH=FALSE)
+
+\dontrun{
 DNMF_result <- DNMF(data, trainlabel, r)
+DNMF_result <- DNMF(data, trainlabel, r=2, gamma=0.1, delta=0.0001, plotit=TRUE)
+}
 }
 
