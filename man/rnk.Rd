@@ -7,13 +7,13 @@
 rnk(object, fn = "./tmp.rnk")
 }
 \arguments{
-\item{object,}{a returned object of function \code{DNMF}}
+\item{object}{a returned object of function \code{DNMF}}
 
-\item{fn,}{the output filename}
+\item{fn}{the output filename}
 }
 \description{
 write a rnk file from matrix W in a returned object of function \code{DNMF}.
-The rnk format is referred \href{http://www.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats#RNK:_Ranked_list_file_format_.28.2A.rnk.29}{RNK}
+The rnk format is referred \href{http://www.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats}{RNK}
 }
 \examples{
 \dontrun{
