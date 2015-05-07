@@ -3,40 +3,52 @@
 #'  The dNMF algorithm with the additional Fisher criterion on the cost 
 #'  function of conventional NMF was designed to increase class-related
 #'  discriminating power.
+#'  
+#'  This algorithm is based on articles.
+#'  \enumerate{
+#'  \item Kim, Bo-Kyeong, and Soo-Young Lee. "Spectral Feature Extraction Using dNMF for Emotion Recognition in Vowel Sounds." Neural Information Processing. Springer Berlin Heidelberg, 2013.
+#'  \item Lee, Soo-Young, Hyun-Ah Song, and Shun-ichi Amari. "A new discriminant NMF algorithm and its application to the extraction of subtle emotional differences in speech." Cognitive neurodynamics 6.6 (2012): 525-535.
+#'  }
+#' @param dat a matrix with gene in row and sample in column
+#' @param trainlabel the label of sample, like c(1,1,2,2,2)
+#' @param r the dimension of expected reduction dimension, with the default value 2
+#' @param maxIter the maximum iteration of update rules, with the default value 1000
+#' @param tol the toleration of coverange, with the default value 1e-7
+#' @author Zhilong Jia and Xiang Zhang
+#' @export
+#' @import Matrix
+#' @examples
+#' dat = rbind(matrix(c(rep(3, 16), rep(8, 24)), ncol=5), 
+#' matrix(c(rep(5, 16), rep(5, 24)), ncol=5), 
+#' matrix(c(rep(18, 16), rep(7, 24)), ncol=5)) + 
+#' matrix(runif(120,-1,1), ncol=5)
+#' trainlabel <- c(1,1,2,2,2)
+#' 
+#' res <- dNMF(dat, trainlabel, r=2, lambada = 0.1)
+#' res$H
+#' 
 
-dat = rbind(matrix(c(rep(3, 16), rep(8, 24)), ncol=5), 
-            matrix(c(rep(5, 16), rep(5, 24)), ncol=5),
-            matrix(c(rep(18, 16), rep(7, 24)), ncol=5)) + 
-    matrix(runif(120,-1,1), ncol=5)
-
-trainlabel <- c(1,1,2,2,2)
-res <- dNMF(dat, trainlabel, r=2, lambada = 1)
-res$H
-
-dNMF <- function(dat, trainlabel, r=2, lambada=0.1, maxIter=1000, tol=1e-7, verbose=TRUE){
+dNMF <- function(dat, trainlabel, r=2, lambada=0.1, maxIter=1000, tol=1e-7){
     
     dat <- as.matrix(dat)
     nFea = nrow(dat); nSmp = ncol(dat)
     eps = .Machine$double.eps
     
-    #init the H0 and W0 matrix
+    # init the H0 and W0 matrix 
+    # The 1st row of H is down-regualted genes, 
+    # while the 2nd row of H is up-regualted genes)
     H = matrix(runif(r*nSmp, eps), r, nSmp)
+    for (i in 1:r){
+        H[i,which(trainlabel==names(table(trainlabel))[i])] = H[i,which(trainlabel==names(table(trainlabel))[i])] + sum(H)
+    }
     H = pmax(H,0)
     W = matrix(runif(nFea*r, eps), nFea, r)
     W = W/colSums(W)
     W = pmax(W, eps)
     b = pmax(abs(W %*% H), eps)
     
-    #calculate EL distance of two matrix
-    for(i in unique(trainlabel)){
-        Hclass[,which(trainlabel==i)] = matrix( rep(rowMeans(H[,which(trainlabel==i)]), length(which(trainlabel==i))), r, length(which(trainlabel==i)))
-    }
-    Hsum = matrix(rep(rowMeans(H), nSmp),r, nSmp)
-    Nk = matrix(rep(table(trainlabel), times=r * table(trainlabel)), nrow=r, byrow=FALSE)
-    Ed = lambada * sum(Nk * (Hclass -Hsum)^2) / (2 * nSmp * r)
-    
-    obj0 = norm(dat-b+eps, type="F") - Ed
-    obj1 =obj0
+    obj0 = -10
+    lambada = lambada * nFea/r
     
     #averaing matrix Ma over all samples and Mc for wach class
     Ma = matrix(1/nSmp, nrow=nSmp, ncol=nSmp)
@@ -44,7 +56,7 @@ dNMF <- function(dat, trainlabel, r=2, lambada=0.1, maxIter=1000, tol=1e-7, verb
     for (i in unique(trainlabel)){
         Mc[[i]] = matrix(1/table(trainlabel)[i], table(trainlabel)[i], table(trainlabel)[i])
     }
-    Mc = Matrix::bdiag(Mc)
+    Mc = as.matrix(Matrix::bdiag(Mc))
     
     Hclass = H
     final = Inf
@@ -54,26 +66,18 @@ dNMF <- function(dat, trainlabel, r=2, lambada=0.1, maxIter=1000, tol=1e-7, verb
     while (final > tol && count <= maxIter) {
         
         # update W and H
-        W = W * (dat %*% t(H) / (W %*% (H %*% t(H))) )
-        lambadaX = lambada * nFea/r * H
-        H = H * ( (t(W) %*% dat + lambadaX %*% Mc) / (t(W) %*% W %*% H + lambadaX %*% Ma) )
+        W = W * (dat %*% t(H) / (W %*% (H %*% t(H)) + eps) )
+        H = H * ( (t(W) %*% dat + lambada * H %*% Mc) / (t(W) %*% W %*% H + lambada * H %*% Ma + eps) )
         
         # H normalization (Formula 11)
         H = as.matrix(H)
         H = H / (rowSums(H)/nSmp + eps)
         
-        # convergence
-        for(i in unique(trainlabel)){
-            Hclass[,which(trainlabel==i)] = matrix( rep(rowMeans(H[,which(trainlabel==i)]), length(which(trainlabel==i))), r, length(which(trainlabel==i)))
-        }
-        Hsum = matrix(rep(rowMeans(H), nSmp),r, nSmp)
-        Nk = matrix(rep(table(trainlabel), times=r * table(trainlabel)), nrow=r, byrow=FALSE)
-        Ed = lambada * sum(Nk * (Hclass -Hsum)^2) / (2 * nSmp * r)
-        
+        # Convergence
         b <- pmax(abs( W%*%H ), eps)
-        obj2 = obj1
-        obj1 = norm(dat-b+eps, type="F") - Ed
-        final = abs(obj1-obj2) / (abs(obj1-obj0) + eps)
+        obj1 = norm(dat-b+eps, type="F")^2 - lambada * sum(diag(H %*% (Ma-Mc) %*% t(H)))
+        final = abs(obj0-obj1) / (abs(obj0) + eps)
+        onj0 = obj1
         
         obj_stack[count] = obj1
         count = count + 1
@@ -81,7 +85,6 @@ dNMF <- function(dat, trainlabel, r=2, lambada=0.1, maxIter=1000, tol=1e-7, verb
     }
     list(V=dat, W=W, H=H, trainlabel=trainlabel, count=count,
          final=final, obj_stack=obj_stack, r=r, call=match.call())
-    
 }
 
 
