@@ -17,11 +17,13 @@
 #' @param gamma the tradeoff value for the within scatter matrix, with the default value 0.1.  
 #' @param delta the tradeoff value for the between scatter matrix, with the default value 1e-4.
 #' @param maxIter the maximum iteration of update rules, with the default value 1000.
+#' @param log log2 data. Default is TRUE.
 #' @param tol the toleration of coverange, with the default value 1e-7.
 #' @param plotit whether plot H (V=WH). Default: FALSE.
 #' @param checkH whether or not check H. Default: TRUE. This parameter aims to 
 #' check whether or not the H safisfy the discriminant metagenes. Usually, this
 #' should be TRUE.
+#' @author Zhilong Jia and Xiang Zhang
 #' @export
 #' @examples
 #' r =2
@@ -36,14 +38,24 @@
 #' 
 
 DNMF <- function(data,trainlabel, r=2, gamma=0.1, delta=0.0001, maxIter=1000, 
-                 tol=1e-7, plotit=FALSE, checkH=TRUE) {
+                 tol=1e-7, log=TRUE, plotit=FALSE, checkH=TRUE) {
 	
     data <- as.matrix(data)
+    data[which(data==0)] <- 1
+    
+    if (log){
+        data <- log2(data + 2) 
+    }
     nFea = nrow(data); nSmp = ncol(data)
     eps = .Machine$double.eps
     
     #init the H0 and W0 matrix
     H = matrix(runif(r*nSmp, eps), r, nSmp)
+    # The 1st row of H is down-regualted genes, 
+    # while the 2nd row of H is up-regualted genes)
+    for (i in 1:r){
+        H[i,which(trainlabel==names(table(trainlabel))[i])] = H[i,which(trainlabel==names(table(trainlabel))[i])] + sum(H)
+    }
     H = pmax(H,0)
     W = matrix(runif(nFea*r, eps), nFea, r)
     W = W/colSums(W)

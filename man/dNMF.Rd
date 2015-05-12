@@ -4,7 +4,8 @@
 \alias{dNMF}
 \title{discrimant Non-Negative Matrix Factorization (dNMF)}
 \usage{
-dNMF(dat, trainlabel, r = 2, lambada = 0.1, maxIter = 1000, tol = 1e-07)
+dNMF(dat, trainlabel, r = 2, lambada = 0.1, maxIter = 1000, tol = 1e-07,
+  log = TRUE, plotit = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{dat}{a matrix with gene in row and sample in column}
@@ -13,9 +14,15 @@ dNMF(dat, trainlabel, r = 2, lambada = 0.1, maxIter = 1000, tol = 1e-07)
 
 \item{r}{the dimension of expected reduction dimension, with the default value 2}
 
+\item{lambada}{a relative weighting factor for the discriminant. Default 0.1}
+
 \item{maxIter}{the maximum iteration of update rules, with the default value 1000}
 
 \item{tol}{the toleration of coverange, with the default value 1e-7}
+
+\item{log}{log2 data. Default is TRUE.}
+
+\item{verbose}{TRUE}
 }
 \description{
 The dNMF algorithm with the additional Fisher criterion on the cost
@@ -38,6 +45,7 @@ trainlabel <- c(1,1,2,2,2)
 
 res <- dNMF(dat, trainlabel, r=2, lambada = 0.1)
 res$H
+res$W[,2]- res$W[,1]
 }
 \author{
 Zhilong Jia and Xiang Zhang

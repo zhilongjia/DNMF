@@ -5,7 +5,8 @@
 \title{Discrimant Non-Negative Matrix Factorization.}
 \usage{
 DNMF(data, trainlabel, r = 2, gamma = 0.1, delta = 1e-04,
-  maxIter = 1000, tol = 1e-07, plotit = FALSE, checkH = TRUE)
+  maxIter = 1000, tol = 1e-07, log = TRUE, plotit = FALSE,
+  checkH = TRUE)
 }
 \arguments{
 \item{data}{a matrix, like expression profilings of some samples. the columns are samples and the rows are gene's expression.}
@@ -21,6 +22,8 @@ DNMF(data, trainlabel, r = 2, gamma = 0.1, delta = 1e-04,
 \item{maxIter}{the maximum iteration of update rules, with the default value 1000.}
 
 \item{tol}{the toleration of coverange, with the default value 1e-7.}
+
+\item{log}{log2 data. Default is TRUE.}
 
 \item{plotit}{whether plot H (V=WH). Default: FALSE.}
 
@@ -51,5 +54,8 @@ DNMF_result <- DNMF(data, trainlabel, r, plotit=FALSE, checkH=FALSE)
 DNMF_result <- DNMF(data, trainlabel, r)
 DNMF_result <- DNMF(data, trainlabel, r=2, gamma=0.1, delta=0.0001, plotit=TRUE)
 }
+}
+\author{
+Zhilong Jia and Xiang Zhang
 }
 
