@@ -2,10 +2,16 @@ Package: DNMF
 Version: 1.1
 Date: 2015-05-07
 Title: Discriminant Non-Negative Matrix Factorization
-Author: Zhilong Jia <zhilongjia@gmail.com>
-Maintainer: Zhilong Jia <zhilongjia@gmail.com>
+Authors@R: c(person("Zhilong", "Jia", role =c("aut", "cre"), 
+    email="zhilongjia@gmail.com"), 
+    person("Xiang", "Zhang", role = "aut", email="zhangxiang_43@aliyun.com"))
 Description: Discriminant Non-Negative Matrix Factorization aims to extend the Non-negative Matrix Factorization algorithm in order to extract features that enforce not only the spatial locality, but also the separability between classes in a discriminant manner. It refers to three article, Zafeiriou, Stefanos, et al. "Exploiting discriminant information in nonnegative matrix factorization with application to frontal face verification." Neural Networks, IEEE Transactions on 17.3 (2006): 683-695. Kim, Bo-Kyeong, and Soo-Young Lee. "Spectral Feature Extraction Using dNMF for Emotion Recognition in Vowel Sounds." Neural Information Processing. Springer Berlin Heidelberg, 2013. and Lee, Soo-Young, Hyun-Ah Song, and Shun-ichi Amari. "A new discriminant NMF algorithm and its application to the extraction of subtle emotional differences in speech." Cognitive neurodynamics 6.6 (2012): 525-535.
-Imports: Matrix
+Depends:
+    foreach
+Imports: 
+    Matrix,
+    parallel,
+    doParallel
 License: GPL (>= 2)
 LazyData: true
 URL: https://github.com/zhilongjia/DNMF

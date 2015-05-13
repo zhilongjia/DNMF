@@ -1,6 +1,6 @@
-#' discrimant Non-Negative Matrix Factorization (dNMF)
+#' a new discrimant Non-Negative Matrix Factorization (dNMF)
 #' 
-#'  The dNMF algorithm with the additional Fisher criterion on the cost 
+#'  The ndNMF algorithm with the additional Fisher criterion on the cost 
 #'  function of conventional NMF was designed to increase class-related
 #'  discriminating power.
 #'  
@@ -21,18 +21,18 @@
 #' @export
 #' @import Matrix
 #' @examples
-#' dat = rbind(matrix(c(rep(3, 16), rep(8, 24)), ncol=5), 
+#' dat <- rbind(matrix(c(rep(3, 16), rep(8, 24)), ncol=5), 
 #' matrix(c(rep(5, 16), rep(5, 24)), ncol=5), 
 #' matrix(c(rep(18, 16), rep(7, 24)), ncol=5)) + 
 #' matrix(runif(120,-1,1), ncol=5)
 #' trainlabel <- c(1,1,2,2,2)
 #' 
-#' res <- dNMF(dat, trainlabel, r=2, lambada = 0.1)
+#' res <- ndNMF(dat, trainlabel, r=2, lambada = 0.1)
 #' res$H
-#' res$W[,2]- res$W[,1]
+#' res$rnk
 #' 
 
-dNMF <- function(dat, trainlabel, r=2, lambada=0.1, maxIter=1000, tol=1e-7, log=TRUE, plotit=FALSE, verbose=FALSE){
+ndNMF <- function(dat, trainlabel, r=2, lambada=0.1, maxIter=1000, tol=1e-7, log=TRUE, plotit=FALSE, verbose=FALSE){
     
     eps = .Machine$double.eps
     dat <- as.matrix(dat)
@@ -100,7 +100,7 @@ dNMF <- function(dat, trainlabel, r=2, lambada=0.1, maxIter=1000, tol=1e-7, log=
         heatmap(H)
     }
     
-    list(V=dat, W=W, H=H, trainlabel=trainlabel, count=count,
+    list(V=dat, W=W, H=H, rnk=W[,2]-W[,1], trainlabel=trainlabel, count=count,
          final=final, obj_stack=obj_stack, r=r, call=match.call())
 }
 

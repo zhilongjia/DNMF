@@ -2,14 +2,14 @@
 % Please edit documentation in R/rnk.R
 \name{rnk}
 \alias{rnk}
-\title{write a rnk file from matrix W.}
+\title{write rnk to a file from matrix W.}
 \usage{
 rnk(object, fn = "./tmp.rnk")
 }
 \arguments{
 \item{object}{a returned object of function \code{DNMF}}
 
-\item{fn}{the output filename}
+\item{fn}{the output filename. Default is "./tmp.rnk"}
 }
 \description{
 write a rnk file from matrix W in a returned object of function \code{DNMF}.
