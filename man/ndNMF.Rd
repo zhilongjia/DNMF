@@ -22,6 +22,8 @@ ndNMF(dat, trainlabel, r = 2, lambada = 0.1, maxIter = 1000,
 
 \item{log}{log2 data. Default is TRUE.}
 
+\item{plotit}{whether plot H (V=WH). Default: FALSE.}
+
 \item{verbose}{TRUE}
 }
 \description{

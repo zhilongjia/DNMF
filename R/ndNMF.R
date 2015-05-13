@@ -16,6 +16,7 @@
 #' @param maxIter the maximum iteration of update rules, with the default value 1000
 #' @param tol the toleration of coverange, with the default value 1e-7
 #' @param log log2 data. Default is TRUE.
+#' @param plotit whether plot H (V=WH). Default: FALSE.
 #' @param verbose TRUE
 #' @author Zhilong Jia and Xiang Zhang
 #' @export
