@@ -4,12 +4,15 @@
 \alias{rnk}
 \title{write rnk to a file from matrix W.}
 \usage{
-rnk(object, fn = "./tmp.rnk")
+rnk(object, fn = "./tmp.rnk", type = "o2m")
 }
 \arguments{
 \item{object}{a returned object of function \code{DNMF}}
 
 \item{fn}{the output filename. Default is "./tmp.rnk"}
+
+\item{type}{type o2m (Default) or o2o. to compare with multi sample labels.
+o2m means one Vs others, while o2o means one Vs another one.}
 }
 \description{
 write a rnk file from matrix W in a returned object of function \code{DNMF}.
@@ -17,7 +20,7 @@ The rnk format is referred \href{http://www.broadinstitute.org/cancer/software/g
 }
 \examples{
 \dontrun{
-rnk(dnmf_result, fn="./tmp.rnk")
+rnk(dnmf_result, fn="tmp.rnk")
 }
 }
 
