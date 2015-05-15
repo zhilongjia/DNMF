@@ -4,6 +4,8 @@
 
 * init H reasonably.
 
+* options to deal with multi-class for rnk
+
 # DNMF version 1.0 (2015-02-16)
 
 * Submit DNMF to CRAN.

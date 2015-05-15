@@ -148,7 +148,7 @@ while (final > tol && count <= maxIter) {
         }
     }
     
-    list(W=W, H=H, rnk=W[,2]-W[,1], trainlabel=trainlabel, meanH=meanH, delta=delta, gamma=gamma, count=count,
+    list(V=data, W=W, H=H, rnk=W[,2]-W[,1], trainlabel=trainlabel, delta=delta, gamma=gamma, count=count,
          final=final, obj_stack=obj_stack, r=r, call=match.call())
 }
 
