@@ -5,7 +5,7 @@
 \title{a new discrimant Non-Negative Matrix Factorization (dNMF)}
 \usage{
 ndNMF(dat, trainlabel, r = 2, lambada = 0.1, maxIter = 1000,
-  tol = 1e-07, log = TRUE, plotit = FALSE, verbose = FALSE)
+  tol = 1e-07, log = TRUE, plotit = FALSE, verbose = FALSE, ...)
 }
 \arguments{
 \item{dat}{a matrix with gene in row and sample in column}
@@ -25,6 +25,8 @@ ndNMF(dat, trainlabel, r = 2, lambada = 0.1, maxIter = 1000,
 \item{plotit}{whether plot H (V=WH). Default: FALSE.}
 
 \item{verbose}{TRUE}
+
+\item{...}{to gplots::heatmap.2}
 }
 \description{
 The ndNMF algorithm with the additional Fisher criterion on the cost

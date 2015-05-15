@@ -10,6 +10,7 @@ Depends:
     foreach
 Imports: 
     Matrix,
+    gplots,
     parallel,
     doParallel
 License: GPL (>= 2)

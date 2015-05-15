@@ -23,22 +23,42 @@
 #' @param checkH whether or not check H. Default: TRUE. This parameter aims to 
 #' check whether or not the H safisfy the discriminant metagenes. Usually, this
 #' should be TRUE.
+#' @param ... to gplots::heatmap.2
+#' @import gplots
 #' @author Zhilong Jia and Xiang Zhang
 #' @export
 #' @examples
-#' r =2
-#' data =  matrix(1:12,3,4)
-#' trainlabel = c(1,1,2,2)
-#' DNMF_result <- DNMF(data, trainlabel, r, plotit=FALSE, checkH=FALSE)
+#' dat <- rbind(matrix(c(rep(3, 16), rep(8, 24)), ncol=5), 
+#' matrix(c(rep(5, 16), rep(5, 24)), ncol=5), 
+#' matrix(c(rep(18, 16), rep(7, 24)), ncol=5)) + 
+#' matrix(runif(120,-1,1), ncol=5)
+#' trainlabel <- c(1,1,2,2,2)
+#' 
+#' DNMF_result <- DNMF(dat, trainlabel, r=2)
+#' 
+#' dat <- matrix(data=c(3,	3, 3, 12, 12, 12, 12,
+#' 3, 2, 3, 12, 12, 12, 12,
+#' 3, 4, 4, 12, 12, 12, 12,
+#' 3, 2, 2, 12, 12, 12, 12,
+#' 3, 3, 3, 6, 6, 6, 6,
+#' 3, 2, 3, 6, 6, 6, 6,
+#' 3, 4, 3, 6, 6, 6, 6,
+#' 3, 2, 2, 6, 6, 6, 6,
+#' 10, 10, 10, 10, 10, 10, 10,
+#' 16, 16, 16, 4, 4, 4, 4,
+#' 16, 16, 16, 8, 8, 8, 8,
+#' 4, 4, 4, 1, 1, 1, 1), ncol=7, nrow=12, byrow=TRUE)
+#' res <- DNMF(dat, trainlabel=c(1,1,1,2,2,2,2), r=2)
+#' res$rnk
 #' 
 #' \dontrun{
-#' DNMF_result <- DNMF(data, trainlabel, r)
-#' DNMF_result <- DNMF(data, trainlabel, r=2, gamma=0.1, delta=0.0001, plotit=TRUE)
+#' DNMF_result <- DNMF(dat, trainlabel, r)
+#' DNMF_result <- DNMF(dat, trainlabel, r=2, gamma=0.1, delta=0.0001, plotit=TRUE)
 #' }
 #' 
 
 DNMF <- function(data,trainlabel, r=2, gamma=0.1, delta=0.0001, maxIter=1000, 
-                 tol=1e-7, log=TRUE, plotit=FALSE, checkH=TRUE) {
+                 tol=1e-7, log=TRUE, plotit=FALSE, checkH=TRUE, ...) {
 	
     data <- as.matrix(data)
     data[which(data==0)] <- 1
@@ -108,9 +128,9 @@ while (final > tol && count <= maxIter) {
     obj_stack[count] = obj1
     count = count + 1
 }
-    # to plot the convergence of the object function
+    # to plot H
     if (plotit){
-    	heatmap(H)
+        gplots::heatmap.2(H, scale="row", trace="none", density.info="none", keysize=1, cexCol=0.8, srtCol=30, ...)
     }
     
 

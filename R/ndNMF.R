@@ -18,6 +18,7 @@
 #' @param log log2 data. Default is TRUE.
 #' @param plotit whether plot H (V=WH). Default: FALSE.
 #' @param verbose TRUE
+#' @param ... to gplots::heatmap.2
 #' @author Zhilong Jia and Xiang Zhang
 #' @export
 #' @import Matrix
@@ -33,7 +34,7 @@
 #' res$rnk
 #' 
 
-ndNMF <- function(dat, trainlabel, r=2, lambada=0.1, maxIter=1000, tol=1e-7, log=TRUE, plotit=FALSE, verbose=FALSE){
+ndNMF <- function(dat, trainlabel, r=2, lambada=0.1, maxIter=1000, tol=1e-7, log=TRUE, plotit=FALSE, verbose=FALSE, ...){
     
     eps = .Machine$double.eps
     dat <- as.matrix(dat)
@@ -96,9 +97,9 @@ ndNMF <- function(dat, trainlabel, r=2, lambada=0.1, maxIter=1000, tol=1e-7, log
         
     }
     
-    # to plot the convergence of the object function
+    # to plot H
     if (plotit){
-        heatmap(H)
+        gplots::heatmap.2(H, scale="row", trace="none", density.info="none", keysize=1, cexCol=0.8, srtCol=30, ...)
     }
     
     list(V=dat, W=W, H=H, rnk=W[,2]-W[,1], trainlabel=trainlabel, count=count,
