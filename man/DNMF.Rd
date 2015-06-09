@@ -55,23 +55,19 @@ trainlabel <- c(1,1,2,2,2)
 
 DNMF_result <- DNMF(dat, trainlabel, r=2)
 
-dat <- matrix(data=c(3,	3, 3, 12, 12, 12, 12,
-3, 2, 3, 12, 12, 12, 12,
-3, 4, 4, 12, 12, 12, 12,
-3, 2, 2, 12, 12, 12, 12,
-3, 3, 3, 6, 6, 6, 6,
-3, 2, 3, 6, 6, 6, 6,
-3, 4, 3, 6, 6, 6, 6,
-3, 2, 2, 6, 6, 6, 6,
-10, 10, 10, 10, 10, 10, 10,
-16, 16, 16, 4, 4, 4, 4,
-16, 16, 16, 8, 8, 8, 8,
-4, 4, 4, 1, 1, 1, 1), ncol=7, nrow=12, byrow=TRUE)
-res <- DNMF(dat, trainlabel=c(1,1,1,2,2,2,2), r=2)
-res$rnk
 
 \dontrun{
-DNMF_result <- DNMF(dat, trainlabel, r)
+# Gene ranking. dat is the raw read count maatrix with sample in column.
+
+#normalising dat
+Sizefactors <- DESeq::estimateSizeFactorsForMatrix(dat)
+dat = sweep(dat, 2, Sizefactors, `/`)
+
+res <- DNMF(dat, trainlabel, r=2)
+
+#The end of gene ranking exmaples
+
+#Other exmaples
 DNMF_result <- DNMF(dat, trainlabel, r=2, gamma=0.1, delta=0.0001, plotit=TRUE)
 }
 }
