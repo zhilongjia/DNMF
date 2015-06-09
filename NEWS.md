@@ -1,4 +1,4 @@
-# DNMF version 1.2 (2015-06-09)
+# DNMF version 1.3 (2015-06-09)
 
 * debug NOTEs (no visible binding for global variable).
 
