@@ -2,7 +2,7 @@
 % Please edit documentation in R/ndNMF.R
 \name{ndNMF}
 \alias{ndNMF}
-\title{a new discrimant Non-Negative Matrix Factorization (dNMF)}
+\title{a new discriminant Non-Negative Matrix Factorization (dNMF)}
 \usage{
 ndNMF(dat, trainlabel, r = 2, lambada = 0.1, maxIter = 1000,
   tol = 1e-07, log = TRUE, plotit = FALSE, verbose = FALSE, ...)

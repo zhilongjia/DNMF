@@ -1,4 +1,4 @@
-#' P value for discrimant Non-Negative Matrix Factorization
+#' P value for discriminant Non-Negative Matrix Factorization
 #' 
 #' Estimate the significance of differentially expressed genes in parallel.
 #' 
@@ -40,6 +40,8 @@ NMFpval <- function (nmf_res, np=100, ncores=parallel::detectCores(), fdr=FALSE,
     doParallel::registerDoParallel(cl)
     if (verbose) {print(paste("getDoParWorkers:", foreach::getDoParWorkers()))}
     strt<-Sys.time()
+    
+    j <- NULL
     matP <- foreach::foreach(1:np, .combine='cbind') %:%
         foreach::foreach(j=rnk, .combine='c') %dopar% {
             length(which(abs(j)< abs(sample(W[,2], length(rnk0)) - W[,1])))

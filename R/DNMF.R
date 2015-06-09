@@ -1,6 +1,6 @@
-#' Discrimant Non-Negative Matrix Factorization.
+#' Discriminant Non-Negative Matrix Factorization.
 #'
-#' Discrimant Non-Negative Matrix Factorization, DNMF, is to extend the Non-negative Matrix Factorization algorithm in 
+#' Discriminant Non-Negative Matrix Factorization, DNMF, is to extend the Non-negative Matrix Factorization algorithm in 
 #' order to extract features that enforce not only the spatial locality, but
 #'  also the separability between classes in a discriminant manner.
 #' 

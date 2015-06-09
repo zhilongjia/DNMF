@@ -1,4 +1,4 @@
-#' a new discrimant Non-Negative Matrix Factorization (dNMF)
+#' a new discriminant Non-Negative Matrix Factorization (dNMF)
 #' 
 #'  The ndNMF algorithm with the additional Fisher criterion on the cost 
 #'  function of conventional NMF was designed to increase class-related

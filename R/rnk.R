@@ -15,7 +15,8 @@
 rnk <- function (object, fn="./tmp.rnk", type="o2m"){
     
     type <- match.arg(type, c("o2m", "o2o"))
-    if (object$r==2) {
+    r <- object$r
+    if (r==2) {
         write.table(object$rnk, fn, sep="\t", quote=FALSE, col.names=FALSE, row.names=TRUE)
     } else if (type=="o2o"){
         for (i in 1:(r-1)) {

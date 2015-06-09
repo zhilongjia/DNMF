@@ -2,7 +2,7 @@
 % Please edit documentation in R/NMFpval.R
 \name{NMFpval}
 \alias{NMFpval}
-\title{P value for discrimant Non-Negative Matrix Factorization}
+\title{P value for discriminant Non-Negative Matrix Factorization}
 \usage{
 NMFpval(nmf_res, np = 100, ncores = parallel::detectCores(), fdr = FALSE,
   top = 1000, verbose = FALSE)

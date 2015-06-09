@@ -2,7 +2,7 @@
 % Please edit documentation in R/DNMF.R
 \name{DNMF}
 \alias{DNMF}
-\title{Discrimant Non-Negative Matrix Factorization.}
+\title{Discriminant Non-Negative Matrix Factorization.}
 \usage{
 DNMF(data, trainlabel, r = 2, gamma = 0.1, delta = 1e-04,
   maxIter = 1000, tol = 1e-07, log = TRUE, plotit = FALSE,
@@ -34,7 +34,7 @@ should be TRUE.}
 \item{...}{to gplots::heatmap.2}
 }
 \description{
-Discrimant Non-Negative Matrix Factorization, DNMF, is to extend the Non-negative Matrix Factorization algorithm in
+Discriminant Non-Negative Matrix Factorization, DNMF, is to extend the Non-negative Matrix Factorization algorithm in
 order to extract features that enforce not only the spatial locality, but
  also the separability between classes in a discriminant manner.
 }
