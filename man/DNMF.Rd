@@ -64,6 +64,7 @@ Sizefactors <- DESeq::estimateSizeFactorsForMatrix(dat)
 dat = sweep(dat, 2, Sizefactors, `/`)
 
 res <- DNMF(dat, trainlabel, r=2)
+rnk <- res$rnk
 
 #The end of gene ranking exmaples
 
