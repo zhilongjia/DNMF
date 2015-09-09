@@ -1,0 +1,23 @@
+citHeader("To cite DNMF in publications, please use:")
+
+citEntry(entry = "Article",
+  author = personList(as.person("Zhilong Jia"),
+  as.person("Xiang Zhang"),
+  as.person("Naiyang Guan"),
+  as.person("Xiaochen Bo"),
+  as.person("Michael R. Barnes"),
+  as.person("Zhigang Luo")),
+  title = "Gene Ranking of RNA-Seq Data via Discriminant Non-Negative Matrix Factorization",
+  publisher = "Public Library of Science",
+  year = "2015",
+  doi = "10.1371/journal.pone.0137782",
+  url = "http://dx.doi.org/10.1371%2Fjournal.pone.0137782",
+  journal = "PLoS ONE",
+  year = "2015",
+  month = "09",
+  volume = "10",
+  pages = "e0137782",
+  number = "9",
+  doi = "10.1371/journal.pone.0137782",
+  textVersion = "Jia Z, Zhang X, Guan N, Bo X, Barnes MR, Luo Z (2015) Gene Ranking of RNA-Seq Data via Discriminant Non-Negative Matrix Factorization. PLoS ONE 10(9): e0137782. doi:10.1371/journal.pone.0137782"
+)
