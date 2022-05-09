@@ -22,6 +22,7 @@
 #' @author Zhilong Jia and Xiang Zhang
 #' @export
 #' @import Matrix
+#' @importFrom stats runif
 #' @examples
 #' dat <- rbind(matrix(c(rep(3, 16), rep(8, 24)), ncol=5), 
 #' matrix(c(rep(5, 16), rep(5, 24)), ncol=5), 

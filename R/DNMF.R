@@ -25,6 +25,7 @@
 #' should be TRUE.
 #' @param ... to gplots::heatmap.2
 #' @import gplots
+#' @importFrom stats runif
 #' @author Zhilong Jia and Xiang Zhang
 #' @export
 #' @examples

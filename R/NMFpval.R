@@ -15,6 +15,7 @@
 #' @return a matrix with columns rnk, p (and fdr)
 #' @export
 #' @import parallel
+#' @importFrom stats p.adjust
 #' @import foreach
 #' @import doParallel
 #' @author Zhilong Jia

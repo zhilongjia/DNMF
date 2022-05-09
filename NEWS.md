@@ -1,3 +1,7 @@
+# DNMF version 1.4 (2021-05-09)
+
+* debug NOTEs (no visible binding for global variable runif...).
+
 # DNMF version 1.3 (2015-06-09)
 
 * debug NOTEs (no visible binding for global variable).
