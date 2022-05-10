@@ -1,7 +1,7 @@
 #' write rnk to a file from matrix W.
 #' 
 #' write a rnk file from matrix W in a returned object of function \code{DNMF}.
-#' The rnk format is referred \href{https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats/}{RNK}
+#' The rnk format is referred \href{https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/Data_formats}{RNK}
 #' 
 #' @param object a returned object of function \code{DNMF}
 #' @param fn the output filename. Default is "./tmp.rnk"

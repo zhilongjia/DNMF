@@ -5,7 +5,7 @@
 #'  also the separability between classes in a discriminant manner.
 #' 
 #' The main algorithm is based on 
-#' \href{http://www.ncbi.nlm.nih.gov/pubmed/16722172}{Zafeiriou, S., et al. 
+#' \href{https://pubmed.ncbi.nlm.nih.gov/16722172/}{Zafeiriou, S., et al. 
 #' (2006) Exploiting discriminant information in 
 #' nonnegative matrix factorization with application to frontal face 
 #' verification, IEEE transactions on neural networks, 17, 683-695}, 

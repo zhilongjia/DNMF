@@ -1,5 +1,5 @@
 Package: DNMF
-Version: 1.4.1
+Version: 1.4.2
 Date: 2022-05-09
 Title: Discriminant Non-Negative Matrix Factorization
 Authors@R: c(person("Zhilong", "Jia", role =c("aut", "cre"), 
